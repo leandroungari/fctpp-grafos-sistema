@@ -1,0 +1,12 @@
+0 - Porto Alegre
+1 - Curitiba
+2 - São Paulo
+3 - Rio de Janeiro
+4 - Belo Horizonte
+5 - Salvador
+6 - Recife
+7 - Natal
+8 - Brasília
+9 - Fortaleza
+10 - Cuiabá	
+11 - Manaus

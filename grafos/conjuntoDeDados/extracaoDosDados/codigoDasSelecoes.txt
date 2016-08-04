@@ -1,0 +1,39 @@
+0 Brasil
+1 Camarões
+2 Croacia
+3 México
+
+4 Austrália
+5 Chile
+6 Espanha
+7 Países Baixos (Holanda)
+
+8 Colômbia
+9 Costa do Marfim
+10 Grécia
+11 Japão
+
+12 Costa Rica
+13 Inglaterra
+14 Itália
+15 Uruguai
+
+16 Equador
+17 França
+18 Honduras
+19 Suíça
+
+20 Argentina
+21 Bósnia e Herzegovina
+22 Irã
+23 Nigéria
+
+24 Alemanha
+25 Estados Unidos
+26 Gana
+27 Portugal
+
+28 Argélia
+29 Bélgica
+30 Coreia do Sul
+31 Rússia
