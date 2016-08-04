@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import jfxtras.labs.scene.layout.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import jfxtras.labs.scene.layout.* ?>
+
+<AnchorPane id="principal" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXMLPrincipalController">
+    <children>
+      <MenuBar prefHeight="25.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Arquivo">
+            <items>
+                <MenuItem fx:id="novoArquivo" mnemonicParsing="false" text="Novo" />
+                <MenuItem fx:id="fecharArquivo" mnemonicParsing="false" text="Fechar" />
+                <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem fx:id="exportarArquivo" mnemonicParsing="false" text="Exportar" />
+                <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem fx:id="sairArquivo" mnemonicParsing="false" text="Sair" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Ferramentas">
+               <items>
+                  <MenuItem fx:id="caminhominimo" mnemonicParsing="false" text="Caminho Mínimo" />
+                  <MenuItem fx:id="componentesConexas" mnemonicParsing="false" text="Componentes Conexas" />
+                  <MenuItem fx:id="coloracao" mnemonicParsing="false" text="Coloração" />
+                  <MenuItem fx:id="conectividade" mnemonicParsing="false" text="Conectividade" />
+                  <MenuItem fx:id="transposicao" mnemonicParsing="false" text="Transposição" />
+                  <MenuItem fx:id="ordemTopologica" mnemonicParsing="false" text="Ordem Topológica" />
+                  <MenuItem fx:id="largura" mnemonicParsing="false" text="Busca em Largura" />
+                  <MenuItem fx:id="arvoreminima" mnemonicParsing="false" text="Árvore Geradora Mínima" />
+               </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Aplicação">
+               <items>
+                  <Menu mnemonicParsing="false" text="Alcance das Seleções">
+                    <items>
+                      <MenuItem fx:id="aplicacaoGeral" mnemonicParsing="false" text="Geral" />
+                        <MenuItem fx:id="aplicacaoGrupos" mnemonicParsing="false" text="Fase de Grupos" />
+                        <MenuItem fx:id="aplicacaoOitavas" mnemonicParsing="false" text="Oitavas de Final" />
+                        <MenuItem fx:id="aplicacaoQuartas" mnemonicParsing="false" text="Quartas de Final" />
+                        <MenuItem fx:id="aplicacaoSemi" mnemonicParsing="false" text="Semifinal" />
+                        <MenuItem fx:id="aplicacaoFinal" mnemonicParsing="false" text="Final" />
+                    </items>
+                  </Menu>
+                  <MenuItem fx:id="aplicacaoMedia" mnemonicParsing="false" text="Média de público" />
+                  <MenuItem fx:id="aplicacaoPercurso" mnemonicParsing="false" text="Percurso das Seleções" />
+                  <MenuItem fx:id="aplicacaoDistancia" mnemonicParsing="false" text="Distância Percorrida" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Ajuda">
+            <items>
+              <MenuItem fx:id="sobre" mnemonicParsing="false" text="Sobre" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Pane fx:id="painelDesenho" layoutX="42.0" layoutY="74.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="50.0" />
+      <Pane fx:id="painelPropriedades" layoutX="744.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="725.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+    </children>
+</AnchorPane>

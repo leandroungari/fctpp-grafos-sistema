@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane id="Pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.painel.FXMLpainelAplicacaoMediaPublicoController">
+   <children>
+      <Button fx:id="buttonExecutar" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" text="Executar" />
+      <Button fx:id="buttonCancelar" layoutX="101.0" layoutY="178.0" mnemonicParsing="false" text="Cancelar" />
+      <Label fx:id="titulo" layoutX="14.0" layoutY="29.0" style="-fx-font-weight: bold;" text="Média de Público" />
+      <Text layoutX="13.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nesta aplicação, as médias de público da fase de grupo são fornecidas. Voce também pode realizar a consulta por grupos:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
+      <Text fx:id="media" layoutX="13.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Média total: " textAlignment="JUSTIFY" wrappingWidth="176.734375" />
+      <ChoiceBox fx:id="choice" layoutX="14.0" layoutY="137.0" prefWidth="150.0" />
+   </children>
+</Pane>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane id="Pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.painel.FXMLpainelAplicacaoDistanciaController">
+   <children>
+      <Button fx:id="buttonExecutar" layoutX="14.0" layoutY="149.0" mnemonicParsing="false" text="Executar" />
+      <Button fx:id="buttonCancelar" layoutX="101.0" layoutY="149.0" mnemonicParsing="false" text="Cancelar" />
+      <Label fx:id="titulo" layoutX="14.0" layoutY="29.0" style="-fx-font-weight: bold;" text="Distância Percorrida" />
+      <Text layoutX="13.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Este algoritmo calcula a suposta distancia percorrida, por meio rodoviários por cada delegação durante o evento." textAlignment="JUSTIFY" wrappingWidth="176.734375" />
+   </children>
+</Pane>

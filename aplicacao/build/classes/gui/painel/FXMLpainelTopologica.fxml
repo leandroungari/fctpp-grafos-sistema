@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane id="Pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.painel.FXMLpainelTopologicaController">
+   <children>
+      <Text layoutX="13.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Neste algoritmo, o resultado exibido será um grafo ordenado topologicamente. Como este algoritmo altera a representação do grafo original, logo deve-se clicar em Fechar antes de executar qualquer outro algoritmo." textAlignment="JUSTIFY" wrappingWidth="176.734375" />
+      <Button fx:id="buttonExecutar" layoutX="24.0" layoutY="348.0" mnemonicParsing="false" text="Executar" />
+      <Button fx:id="buttonFechar" layoutX="101.0" layoutY="348.0" mnemonicParsing="false" text="Fechar" />
+      <Label fx:id="titulo" layoutX="14.0" layoutY="29.0" style="-fx-font-weight: bold;" text="Ordenação Topológica" />
+      <TextField fx:id="verticeInicial" layoutX="13.0" layoutY="293.0" />
+      <Label layoutX="13.0" layoutY="266.0" text="Vértice Inicial" />
+      <Text layoutX="13.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione o vértice da busca em profundidade:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
+   </children>
+</Pane>
