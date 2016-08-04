@@ -49,6 +49,8 @@
                   <MenuItem fx:id="aplicacaoMedia" mnemonicParsing="false" text="Média de público" />
                   <MenuItem fx:id="aplicacaoPercurso" mnemonicParsing="false" text="Percurso das Seleções" />
                   <MenuItem fx:id="aplicacaoDistancia" mnemonicParsing="false" text="Distância Percorrida" />
+                  <MenuItem fx:id="aplicacaoSelecoes" mnemonicParsing="false" text="Tabela de Seleções" />
+                  <MenuItem fx:id="aplicacaoSedes" mnemonicParsing="false" text="Tabela de Sedes" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Ajuda">

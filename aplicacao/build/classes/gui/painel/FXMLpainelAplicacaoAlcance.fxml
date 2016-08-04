@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane id="Pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.painel.FXMLpainelAplicacaoAlcanceController">
+   <children>
+      <Button fx:id="buttonCancelar" layoutX="64.0" layoutY="330.0" mnemonicParsing="false" text="Fechar" />
+      <Label fx:id="titulo" layoutX="14.0" layoutY="29.0" style="-fx-font-weight: bold;" text="Competição Completa" />
+      <Text layoutX="13.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Todos os empates tem aresta em ambos os sentidos, caso contrário a aresta tem peso no valor 1  partindo do vencedor para o perdedor, 0 (não-visível) no perdedor." textAlignment="JUSTIFY" wrappingWidth="176.734375" />
+      <Label layoutX="15.0" layoutY="221.0" text="Fase de Grupos - Preto" />
+      <Label layoutX="15.0" layoutY="238.0" text="Oitavas de Final - Azul Claro" />
+      <Label layoutX="15.0" layoutY="255.0" text="Quartas de Final - Verde" />
+      <Label layoutX="15.0" layoutY="272.0" text="Semifinal - Laranja" />
+      <Label layoutX="15.0" layoutY="289.0" text="Final - Vermelho" />
+      <Label layoutX="18.0" layoutY="191.0" text="Cores:" />
+   </children>
+</Pane>

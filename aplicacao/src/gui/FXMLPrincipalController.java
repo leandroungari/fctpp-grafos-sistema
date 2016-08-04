@@ -5,8 +5,11 @@
  */
 package gui;
 
+import codificacoes.conjuntoDados.ConjuntoDados;
+import codificacoes.conjuntoDados.VerticeSelecao;
 import codificacoes.representacaoComputacional.*;
 import desenho.Grafo;
+import desenho.Vertice;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +30,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
@@ -95,6 +99,9 @@ public class FXMLPrincipalController implements Initializable {
     private MenuItem aplicacaoGeral;
 
     @FXML
+    private MenuItem aplicacaoGrupos;
+
+    @FXML
     private MenuItem aplicacaoOitavas;
 
     @FXML
@@ -114,6 +121,12 @@ public class FXMLPrincipalController implements Initializable {
 
     @FXML
     private MenuItem aplicacaoDistancia;
+
+    @FXML
+    private MenuItem aplicacaoSelecoes;
+
+    @FXML
+    private MenuItem aplicacaoSedes;
 
     //////////////
     public static Adjacencia lista;
@@ -351,13 +364,13 @@ public class FXMLPrincipalController implements Initializable {
         });
 
         aplicacaoDistancia.setOnAction(event -> {
-            
+
             //Mostrando grafo
             File file = new File("distancia.txt");
             int posicao = file.getAbsolutePath().indexOf("distancia.txt");
-            String path = file.getAbsolutePath().substring(0, posicao-10);
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
             file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/distanciaSedes/distancia.txt");
-            
+
             lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
             painelDesenho.getChildren().clear();
             grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
@@ -365,7 +378,7 @@ public class FXMLPrincipalController implements Initializable {
 
             fecharArquivo.setDisable(false);
             exportarArquivo.setDisable(false);
-            
+
             //Mostrando barra
             try {
 
@@ -374,39 +387,204 @@ public class FXMLPrincipalController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
+
         });
 
         aplicacaoFinal.setOnAction(event -> {
 
-        });
+            FXMLPrincipalController.painelD.getChildren().clear();
+            FXMLPrincipalController.painel.getChildren().clear();
 
-        aplicacaoGeral.setOnAction(event -> {
-            
             //Mostrando grafo
             File file = new File("distancia.txt");
             int posicao = file.getAbsolutePath().indexOf("distancia.txt");
-            String path = file.getAbsolutePath().substring(0, posicao-10);
-            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/distanciaSedes/distancia.txt");
-            
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
+            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/competicaoCompleta/competicaoCompleta.txt");
+
             lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
             painelDesenho.getChildren().clear();
             grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
             grafo.desenhar();
 
+            ConjuntoDados conj = new ConjuntoDados(lista);
+            conj.calcularCampeao();
+
+            int numero = 0;
+            String fase = "";
+
+            for (Vertice a : grafo.getVertex()) {
+
+                numero = a.getID();
+
+                for (VerticeSelecao vert : conj.selecoes) {
+
+                    if (vert.getNumero() == numero) {
+                        fase = vert.getFaseDaCompeticao();
+                        break;
+                    }
+                }
+
+                if (fase.equalsIgnoreCase("Final")) {
+                    a.setFill(Color.RED);
+                } else {
+                    a.setFill(Color.BLACK);
+                }
+
+            }
+
             fecharArquivo.setDisable(false);
             exportarArquivo.setDisable(false);
+
+            //Mostrando barra
+            try {
+
+                painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoAlcance.fxml")));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
-        
+
+        aplicacaoGrupos.setOnAction(event -> {
+
+            FXMLPrincipalController.painelD.getChildren().clear();
+            FXMLPrincipalController.painel.getChildren().clear();
+
+            //Mostrando grafo
+            File file = new File("distancia.txt");
+            int posicao = file.getAbsolutePath().indexOf("distancia.txt");
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
+            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/competicaoCompleta/competicaoCompleta.txt");
+
+            lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
+            painelDesenho.getChildren().clear();
+            grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
+            grafo.desenhar();
+
+            ConjuntoDados conj = new ConjuntoDados(lista);
+            conj.calcularCampeao();
+
+            int numero = 0;
+            String fase = "";
+
+            for (Vertice a : grafo.getVertex()) {
+
+                numero = a.getID();
+
+                for (VerticeSelecao vert : conj.selecoes) {
+
+                    if (vert.getNumero() == numero) {
+                        fase = vert.getFaseDaCompeticao();
+                        break;
+                    }
+                }
+
+                if (fase.equalsIgnoreCase("Fase de Grupos")) {
+                    a.setFill(Color.BLACK);
+                } else {
+                    a.setFill(Color.GRAY);
+                }
+
+            }
+
+            fecharArquivo.setDisable(false);
+            exportarArquivo.setDisable(false);
+
+            //Mostrando barra
+            try {
+
+                painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoAlcance.fxml")));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+
+        aplicacaoGeral.setOnAction(event -> {
+
+            FXMLPrincipalController.painelD.getChildren().clear();
+            FXMLPrincipalController.painel.getChildren().clear();
+
+            //Mostrando grafo
+            File file = new File("distancia.txt");
+            int posicao = file.getAbsolutePath().indexOf("distancia.txt");
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
+            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/competicaoCompleta/competicaoCompleta.txt");
+
+            lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
+            painelDesenho.getChildren().clear();
+            grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
+            grafo.desenhar();
+
+            ConjuntoDados conj = new ConjuntoDados(lista);
+            conj.calcularCampeao();
+
+            int numero = 0;
+            String fase = "";
+
+            for (Vertice a : grafo.getVertex()) {
+
+                numero = a.getID();
+
+                for (VerticeSelecao vert : conj.selecoes) {
+
+                    if (vert.getNumero() == numero) {
+                        fase = vert.getFaseDaCompeticao();
+                        break;
+                    }
+                }
+
+                switch (fase) {
+
+                    case "Fase de grupos":
+                        a.setFill(Color.BLACK);
+                        break;
+
+                    case "Oitavas de final":
+                        a.setFill(Color.LIGHTBLUE);
+                        break;
+
+                    case "Quartas de final":
+                        a.setFill(Color.GREEN);
+                        break;
+
+                    case "Semi-final":
+                        a.setFill(Color.ORANGE);
+                        break;
+
+                    case "Final":
+                        a.setFill(Color.RED);
+                        break;
+
+                    default:
+
+                        System.out.println("deu errado :(");
+                        return;
+                }
+            }
+
+            fecharArquivo.setDisable(false);
+            exportarArquivo.setDisable(false);
+
+            //Mostrando barra
+            try {
+
+                painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoAlcance.fxml")));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
         //Média de público
         aplicacaoMedia.setOnAction(event -> {
             //Mostrando grafo
             File file = new File("distancia.txt");
             int posicao = file.getAbsolutePath().indexOf("distancia.txt");
-            String path = file.getAbsolutePath().substring(0, posicao-10);
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
             file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/publicoGrupos/faseDeGrupos.txt");
-            
+
             lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
             painelDesenho.getChildren().clear();
             grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
@@ -414,7 +592,7 @@ public class FXMLPrincipalController implements Initializable {
 
             fecharArquivo.setDisable(false);
             exportarArquivo.setDisable(false);
-            
+
             try {
 
                 painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoMediaPublico.fxml")));
@@ -422,23 +600,226 @@ public class FXMLPrincipalController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         });
 
         aplicacaoOitavas.setOnAction(event -> {
 
+            FXMLPrincipalController.painelD.getChildren().clear();
+            FXMLPrincipalController.painel.getChildren().clear();
+
+            //Mostrando grafo
+            File file = new File("distancia.txt");
+            int posicao = file.getAbsolutePath().indexOf("distancia.txt");
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
+            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/competicaoCompleta/competicaoCompleta.txt");
+
+            lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
+            painelDesenho.getChildren().clear();
+            grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
+            grafo.desenhar();
+
+            ConjuntoDados conj = new ConjuntoDados(lista);
+            conj.calcularCampeao();
+
+            int numero = 0;
+            String fase = "";
+
+            for (Vertice a : grafo.getVertex()) {
+
+                numero = a.getID();
+
+                for (VerticeSelecao vert : conj.selecoes) {
+
+                    if (vert.getNumero() == numero) {
+                        fase = vert.getFaseDaCompeticao();
+                        break;
+                    }
+                }
+
+                if (fase.equalsIgnoreCase("Oitavas de Final")) {
+                    a.setFill(Color.LIGHTBLUE);
+                } else {
+                    a.setFill(Color.BLACK);
+                }
+
+            }
+
+            fecharArquivo.setDisable(false);
+            exportarArquivo.setDisable(false);
+
+            //Mostrando barra
+            try {
+
+                painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoAlcance.fxml")));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         });
 
         aplicacaoPercurso.setOnAction(event -> {
-            
-            
+
         });
 
         aplicacaoQuartas.setOnAction(event -> {
 
+            FXMLPrincipalController.painelD.getChildren().clear();
+            FXMLPrincipalController.painel.getChildren().clear();
+
+            //Mostrando grafo
+            File file = new File("distancia.txt");
+            int posicao = file.getAbsolutePath().indexOf("distancia.txt");
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
+            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/competicaoCompleta/competicaoCompleta.txt");
+
+            lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
+            painelDesenho.getChildren().clear();
+            grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
+            grafo.desenhar();
+
+            ConjuntoDados conj = new ConjuntoDados(lista);
+            conj.calcularCampeao();
+
+            int numero = 0;
+            String fase = "";
+
+            for (Vertice a : grafo.getVertex()) {
+
+                numero = a.getID();
+
+                for (VerticeSelecao vert : conj.selecoes) {
+
+                    if (vert.getNumero() == numero) {
+                        fase = vert.getFaseDaCompeticao();
+                        break;
+                    }
+                }
+
+                if (fase.equalsIgnoreCase("Quartas de Final")) {
+                    a.setFill(Color.GREEN);
+                } else {
+                    a.setFill(Color.BLACK);
+                }
+
+            }
+
+            fecharArquivo.setDisable(false);
+            exportarArquivo.setDisable(false);
+
+            //Mostrando barra
+            try {
+
+                painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoAlcance.fxml")));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         });
 
         aplicacaoSemi.setOnAction(event -> {
+
+            FXMLPrincipalController.painelD.getChildren().clear();
+            FXMLPrincipalController.painel.getChildren().clear();
+
+            //Mostrando grafo
+            File file = new File("distancia.txt");
+            int posicao = file.getAbsolutePath().indexOf("distancia.txt");
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
+            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/competicaoCompleta/competicaoCompleta.txt");
+
+            lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
+            painelDesenho.getChildren().clear();
+            grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
+            grafo.desenhar();
+
+            ConjuntoDados conj = new ConjuntoDados(lista);
+            conj.calcularCampeao();
+
+            int numero = 0;
+            String fase = "";
+
+            for (Vertice a : grafo.getVertex()) {
+
+                numero = a.getID();
+
+                for (VerticeSelecao vert : conj.selecoes) {
+
+                    if (vert.getNumero() == numero) {
+                        fase = vert.getFaseDaCompeticao();
+                        break;
+                    }
+                }
+
+                if (fase.equalsIgnoreCase("Semi-Final")) {
+                    a.setFill(Color.ORANGE);
+                } else {
+                    a.setFill(Color.BLACK);
+                }
+
+            }
+
+            fecharArquivo.setDisable(false);
+            exportarArquivo.setDisable(false);
+
+            //Mostrando barra
+            try {
+
+                painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoAlcance.fxml")));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+
+        aplicacaoSelecoes.setOnAction(event -> {
+
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoTabelaSelecoes.fxml"));
+
+            } catch (IOException ex) {
+
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            Stage stage = new Stage();
+            stage.setTitle("Tabela de seleções");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            stage.getIcons().add(new Image("gui/images/icon.png"));
+
+            stage.initStyle(StageStyle.DECORATED);
+            stage.show();
+
+        });
+
+        aplicacaoSedes.setOnAction(event -> {
+
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoTabelaSedes.fxml"));
+
+            } catch (IOException ex) {
+
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            Stage stage = new Stage();
+            stage.setTitle("Tabela de seleções");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            stage.getIcons().add(new Image("gui/images/icon.png"));
+
+            stage.initStyle(StageStyle.DECORATED);
+            stage.show();
 
         });
 

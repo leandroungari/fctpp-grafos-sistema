@@ -131,7 +131,9 @@ public class FXMLpainelAplicacaoDistanciaTabelaController implements Initializab
             file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/percursoSelecoes/percurso.txt");
 
             Adjacencia listaTemp = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
-
+            
+            //listaTemp.exibir();
+            //lista.exibir();
             //Grafo das distancias
             for (Aresta a : grafo.getEdges()) {
                 a.getForma().setStroke(Color.BLACK);
