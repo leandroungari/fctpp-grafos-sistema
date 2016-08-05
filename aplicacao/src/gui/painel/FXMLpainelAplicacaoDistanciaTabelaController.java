@@ -170,6 +170,7 @@ public class FXMLpainelAplicacaoDistanciaTabelaController implements Initializab
                     if(a.getOrigem() == i && a.getDestino() == j){
                         a.getForma().setStroke(Color.RED);
                         a.getForma().setStrokeWidth(4);
+                        a.getForma().toFront();
                     }
                 }
             }
