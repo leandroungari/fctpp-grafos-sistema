@@ -5,7 +5,6 @@
  */
 package gui.painel;
 
-import codificacoes.kruskal.Kruskal;
 import codificacoes.representacaoComputacional.Adjacencia;
 import desenho.Aresta;
 import desenho.Grafo;
@@ -31,7 +30,7 @@ import javafx.stage.StageStyle;
  *
  * @author Leandro Ungari <leandroungari@gmail.com>
  */
-public class FXMLpainelAplicacaoDistanciaController implements Initializable {
+public class FXMLpainelAplicacaoPercursoController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -56,8 +55,8 @@ public class FXMLpainelAplicacaoDistanciaController implements Initializable {
             
             Parent root = null;
             try {
-                root = FXMLLoader.load(getClass().getResource("FXMLpainelAplicacaoDistanciaTabela.fxml"));
-                System.out.println("passou");
+                root = FXMLLoader.load(getClass().getResource("FXMLpainelAplicacaoPercursoTabela.fxml"));
+                
             } catch (IOException ex) {
 
                 Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);

@@ -105,4 +105,18 @@ public abstract class Aresta {
     public int getDestino(){
         return this.destino.getID();
     }
+    
+    public Vertice getOrigemVertice(){
+        return this.origem;
+    }
+    
+    public Vertice getDestinoVertice(){
+        return this.destino;
+    }
+
+    public Text getLabelPeso() {
+        return labelPeso;
+    }
+    
+    
 }

@@ -5,40 +5,25 @@
  */
 package gui.painel;
 
-import codificacoes.kruskal.Kruskal;
 import codificacoes.representacaoComputacional.Adjacencia;
+import codificacoes.representacaoComputacional.AdjacenciaMultipla;
 import codificacoes.representacaoComputacional.Arquivo;
-import codificacoes.representacaoComputacional.ListaAdjacencia;
-import com.sun.javafx.property.adapter.PropertyDescriptor;
 import desenho.Aresta;
 import desenho.Grafo;
 import gui.FXMLPrincipalController;
-import static gui.FXMLPrincipalController.lista;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -83,39 +68,81 @@ public class FXMLpainelAplicacaoDistanciaTabelaController implements Initializab
         selecao.setCellValueFactory(new PropertyValueFactory<LinhaTabela, String>("nome"));
         distancia.setCellValueFactory(new PropertyValueFactory<LinhaTabela, Integer>("distancia"));
 
+        File fileA = new File("distancia.txt");
+        int posicaoA = fileA.getAbsolutePath().indexOf("distancia.txt");
+        String pathA = fileA.getAbsolutePath().substring(0, posicaoA - 10);
+        fileA = new File(pathA + "grafos/conjuntoDeDados/grafosDigrafos/percursoSelecoes/percurso.txt");
+
+        AdjacenciaMultipla listaTempA = Arquivo.leituraArquivoMultiplo(fileA.getAbsolutePath(), false);
+
+        Queue<Integer> filaA = new LinkedList<>();
+        int[] repetidosA;
+        int limiteA = listaTempA.getNumeroVertices();
+
+        int[] total = new int[32];
+
+        for (int i = 0; i < limiteA; i++) {
+
+            for (int j = 0; j < limiteA; j++) {
+
+                if (listaTempA.verificaAdjacencia(i, j)) {
+
+                    repetidosA = listaTempA.getPeso(i, j);
+
+                    for (int a : repetidosA) {
+
+                        filaA.add(i);
+                        filaA.add(j);
+                        filaA.add(a); 
+                    }
+
+                }
+            }
+        }
+        int m, n, local;
+        
+        while(!filaA.isEmpty()){
+            
+            m = filaA.poll();
+            n = filaA.poll();
+            local = filaA.poll();
+            
+            total[local] += lista.getPeso(m, n);
+        }
+
         conteudo = FXCollections.observableArrayList(
-                new LinhaTabela(0, "Brasil", 0),
-                new LinhaTabela(1, "Camarões", 0),
-                new LinhaTabela(2, "Croácia", 0),
-                new LinhaTabela(3, "México", 0),
-                new LinhaTabela(4, "Austrália", 0),
-                new LinhaTabela(5, "Chile", 0),
-                new LinhaTabela(6, "Espanha", 0),
-                new LinhaTabela(7, "Países Baixos", 0),
-                new LinhaTabela(8, "Colômbia", 0),
-                new LinhaTabela(9, "Costa do Marfim", 0),
-                new LinhaTabela(10, "Grécia", 0),
-                new LinhaTabela(11, "Japão", 0),
-                new LinhaTabela(12, "Costa Rica", 0),
-                new LinhaTabela(13, "Inglaterra", 0),
-                new LinhaTabela(14, "Itália", 0),
-                new LinhaTabela(15, "Uruguai", 0),
-                new LinhaTabela(16, "Equador", 0),
-                new LinhaTabela(17, "França", 0),
-                new LinhaTabela(18, "Honduras", 0),
-                new LinhaTabela(19, "Suíça", 0),
-                new LinhaTabela(20, "Argentina", 0),
-                new LinhaTabela(21, "Bósnia e Herzegovina", 0),
-                new LinhaTabela(22, "Irã", 0),
-                new LinhaTabela(23, "Nigéria", 0),
-                new LinhaTabela(24, "Alemanha", 0),
-                new LinhaTabela(25, "Estados Unidos", 0),
-                new LinhaTabela(26, "Gana", 0),
-                new LinhaTabela(27, "Portugal", 0),
-                new LinhaTabela(28, "Argélia", 0),
-                new LinhaTabela(29, "Bélgica", 0),
-                new LinhaTabela(30, "Coréia do Sul", 0),
-                new LinhaTabela(31, "Rússia", 0)
+                new LinhaTabela(0, "Brasil", total[0]),
+                new LinhaTabela(1, "Camarões", total[1]),
+                new LinhaTabela(2, "Croácia", total[2]),
+                new LinhaTabela(3, "México", total[3]),
+                new LinhaTabela(4, "Austrália", total[4]),
+                new LinhaTabela(5, "Chile", total[5]),
+                new LinhaTabela(6, "Espanha", total[6]),
+                new LinhaTabela(7, "Países Baixos", total[7]),
+                new LinhaTabela(8, "Colômbia", total[8]),
+                new LinhaTabela(9, "Costa do Marfim", total[9]),
+                new LinhaTabela(10, "Grécia", total[10]),
+                new LinhaTabela(11, "Japão", total[11]),
+                new LinhaTabela(12, "Costa Rica", total[12]),
+                new LinhaTabela(13, "Inglaterra", total[13]),
+                new LinhaTabela(14, "Itália", total[14]),
+                new LinhaTabela(15, "Uruguai", total[15]),
+                new LinhaTabela(16, "Equador", total[16]),
+                new LinhaTabela(17, "França", total[17]),
+                new LinhaTabela(18, "Honduras", total[18]),
+                new LinhaTabela(19, "Suíça", total[19]),
+                new LinhaTabela(20, "Argentina", total[20]),
+                new LinhaTabela(21, "Bósnia e Herzegovina", total[21]),
+                new LinhaTabela(22, "Irã", total[22]),
+                new LinhaTabela(23, "Nigéria", total[23]),
+                new LinhaTabela(24, "Alemanha", total[24]),
+                new LinhaTabela(25, "Estados Unidos", total[25]),
+                new LinhaTabela(26, "Gana", total[26]),
+                new LinhaTabela(27, "Portugal", total[27]),
+                new LinhaTabela(28, "Argélia", total[28]),
+                new LinhaTabela(29, "Bélgica", total[29]),
+                new LinhaTabela(30, "Coréia do Sul", total[30]),
+                new LinhaTabela(31, "Rússia", total[31])
         );
 
         tabela.setItems(conteudo);
@@ -130,8 +157,8 @@ public class FXMLpainelAplicacaoDistanciaTabelaController implements Initializab
             String path = file.getAbsolutePath().substring(0, posicao - 10);
             file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/percursoSelecoes/percurso.txt");
 
-            Adjacencia listaTemp = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
-            
+            AdjacenciaMultipla listaTemp = Arquivo.leituraArquivoMultiplo(file.getAbsolutePath(), false);
+
             //listaTemp.exibir();
             //lista.exibir();
             //Grafo das distancias
@@ -141,18 +168,26 @@ public class FXMLpainelAplicacaoDistanciaTabelaController implements Initializab
             }
 
             Queue<Integer> fila = new LinkedList<>();
-
+            int[] repetidos;
             int limite = listaTemp.getNumeroVertices();
 
             for (int i = 0; i < limite; i++) {
 
                 for (int j = 0; j < limite; j++) {
 
-                    if (listaTemp.verificaAdjacencia(i, j) && listaTemp.getPeso(i, j) == codigo) {
+                    if (listaTemp.verificaAdjacencia(i, j)) {
 
-                        System.out.println(i + " " + j + " " + listaTemp.getPeso(i, j));
-                        fila.add(i);
-                        fila.add(j);
+                        repetidos = listaTemp.getPeso(i, j);
+
+                        for (int a : repetidos) {
+
+                            if (a == codigo) {
+
+                                fila.add(i);
+                                fila.add(j);
+                            }
+                        }
+
                     }
                 }
 
@@ -165,18 +200,21 @@ public class FXMLpainelAplicacaoDistanciaTabelaController implements Initializab
                 j = fila.poll();
 
                 for (Aresta a : grafo.getEdges()) {
-                    
-                    
-                    if(a.getOrigem() == i && a.getDestino() == j){
+
+                    if (a.getOrigem() == i && a.getDestino() == j || a.getOrigem() == j && a.getDestino() == i) {
                         a.getForma().setStroke(Color.RED);
                         a.getForma().setStrokeWidth(4);
                         a.getForma().toFront();
+                        a.getOrigemVertice().toFront();
+                        a.getOrigemVertice().numero.toFront();
+                        a.getDestinoVertice().toFront();
+                        a.getDestinoVertice().numero.toFront();
+                        if(a.getLabelPeso() != null) a.getLabelPeso().setStroke(Color.RED);
+                        if(a.getLabelPeso() != null) a.getLabelPeso().toFront();
                     }
                 }
             }
-            
-            //tem que alterar a implementação da lista de adjacencia porque está sobrescrevendo elementos
-            // e calcular a distancia
+
         });
 
     }

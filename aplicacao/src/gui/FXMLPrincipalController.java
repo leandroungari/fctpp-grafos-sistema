@@ -660,6 +660,28 @@ public class FXMLPrincipalController implements Initializable {
         });
 
         aplicacaoPercurso.setOnAction(event -> {
+            
+            //Mostrando grafo
+            File file = new File("distancia.txt");
+            int posicao = file.getAbsolutePath().indexOf("distancia.txt");
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
+            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/percursoSelecoes/percurso.txt");
+
+            lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
+            painelDesenho.getChildren().clear();
+            grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
+            grafo.desenhar();
+
+            fecharArquivo.setDisable(false);
+            exportarArquivo.setDisable(false);
+
+            try {
+
+                painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoPercurso.fxml")));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         });
 
@@ -811,7 +833,7 @@ public class FXMLPrincipalController implements Initializable {
             }
 
             Stage stage = new Stage();
-            stage.setTitle("Tabela de seleções");
+            stage.setTitle("Tabela de sedes");
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.initModality(Modality.WINDOW_MODAL);

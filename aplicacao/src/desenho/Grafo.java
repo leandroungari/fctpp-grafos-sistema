@@ -6,6 +6,7 @@
 package desenho;
 
 import codificacoes.representacaoComputacional.Adjacencia;
+import codificacoes.representacaoComputacional.AdjacenciaMultipla;
 import gui.FXMLPrincipalController;
 import java.util.ArrayList;
 import javafx.scene.layout.Pane;
@@ -62,9 +63,12 @@ public class Grafo {
                         a = new Loop(this.getVertice(i), lista.getPeso(i, j), directed);
                     } else if (lista.verificaAdjacencia(j, i)) {
 
-                        if(directed) a = new Arco(this.getVertice(i), this.getVertice(j), lista.getPeso(i, j), directed);
-                        else a = new Linha(this.getVertice(i), this.getVertice(j), lista.getPeso(i, j), directed);
-                        
+                        if (directed) {
+                            a = new Arco(this.getVertice(i), this.getVertice(j), lista.getPeso(i, j), directed);
+                        } else {
+                            a = new Linha(this.getVertice(i), this.getVertice(j), lista.getPeso(i, j), directed);
+                        }
+
                     } else {
 
                         a = new Linha(this.getVertice(i), this.getVertice(j), lista.getPeso(i, j), directed);
@@ -74,6 +78,73 @@ public class Grafo {
                     indice = edges.indexOf(a);
                     vertex.get(i).origem.add(indice);
                     vertex.get(j).destino.add(indice);
+                }
+            }
+        }
+    }
+
+    public Grafo(Pane parent, int nVert, AdjacenciaMultipla lista) {
+
+        this.parent = parent;
+        this.directed = lista.isTipoGrafo();
+
+        RainbowScale cS = new RainbowScale();
+        //GrayScale cS = new GrayScale();
+        int colorStep = 255 / nVert;
+        int r, g, b;
+        for (int i = 0; i < nVert; i++) {
+
+            Vertice v = new Vertice(i, 0, 0, 15);
+
+            java.awt.Color awt = cS.getColor(i * colorStep);
+            r = awt.getRed();
+            g = awt.getGreen();
+            b = awt.getBlue();
+
+            javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(r, g, b);
+            v.setFill(fxColor);
+
+            this.vertex.add(v);
+        }
+
+        if (!topologica) {
+            computeCircledPosition(150);
+        }
+
+        Aresta a;
+        int indice;
+        int[] repetidos;
+        for (int i = 0; i < nVert; i++) {
+
+            for (int j = 0; j < nVert; j++) {
+
+                if (lista.verificaAdjacencia(i, j)) {
+
+                    repetidos = lista.getPeso(i, j);
+
+                    for (int peso : repetidos) {
+
+                        if (i == j) {
+
+                            a = new Loop(this.getVertice(i), peso, directed);
+                        } else if (lista.verificaAdjacencia(j, i)) {
+
+                            if (directed) {
+                                a = new Arco(this.getVertice(i), this.getVertice(j), peso, directed);
+                            } else {
+                                a = new Linha(this.getVertice(i), this.getVertice(j), peso, directed);
+                            }
+
+                        } else {
+
+                            a = new Linha(this.getVertice(i), this.getVertice(j), peso, directed);
+                        }
+
+                        edges.add(a);
+                        indice = edges.indexOf(a);
+                        vertex.get(i).origem.add(indice);
+                        vertex.get(j).destino.add(indice);
+                    }
                 }
             }
         }
@@ -111,9 +182,9 @@ public class Grafo {
 
         if (!topologica) {
             computeCircledPosition(150);
-            
+
         } else {
-            
+
             int cont = 0;
             for (codificacoes.buscaProfundidade.Vertice v : conjunto) {
 
@@ -242,8 +313,8 @@ public class Grafo {
         this.topologica = valor;
 
     }
-    
-    public boolean getTopologica(){
+
+    public boolean getTopologica() {
         return topologica;
     }
 

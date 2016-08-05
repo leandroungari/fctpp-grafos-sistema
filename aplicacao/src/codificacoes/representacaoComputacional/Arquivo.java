@@ -80,4 +80,54 @@ public class Arquivo {
         return(adjacencia);
         
     }
+    
+    public static AdjacenciaMultipla leituraArquivoMultiplo(String nomeArquivo, boolean tipoRepresentacao){
+        
+        AdjacenciaMultipla adjacencia = null;
+        
+        try {
+            
+            Scanner scan = new Scanner(new FileReader(nomeArquivo));
+            
+            //Lendo e verificando se é grafo ou digrafo
+            boolean tipoGrafo;
+            if(scan.nextInt() == 0) tipoGrafo = false; //Falso para grafo
+            else tipoGrafo = true; //Verdadeiro para Digrafo
+            
+            int numeroVertices = scan.nextInt(); //Lendo número de vertices
+            
+            //Instanciando a estrutura que será utilizada.
+            ListaAdjacenciaMultipla la;
+            la = new ListaAdjacenciaMultipla(numeroVertices);
+            adjacencia = new AdjacenciaMultipla(numeroVertices, la, tipoGrafo);
+
+            int i, j, peso;
+            
+            while(scan.hasNext()){
+                
+                i = scan.nextInt(); //Lendo vertice 1
+                j = scan.nextInt(); //Lendo vertice 2
+                peso = scan.nextInt(); //Lendo peso (ou valor)
+                
+                if(tipoGrafo == true) adjacencia.adicionaAresta(i, j, peso); //Para Digrafos
+                else{
+                    
+                    //Para Grafos
+                    adjacencia.adicionaAresta(i,j, peso);
+                    adjacencia.adicionaAresta(j, i, peso);
+                }
+                
+                
+            }
+            
+            scan.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Arquivo.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro na abertura do arquivo!");
+        }
+        
+        return(adjacencia);
+        
+    }
 }
