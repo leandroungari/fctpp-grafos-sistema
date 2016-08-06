@@ -41,7 +41,6 @@ public class FXMLpainelAplicacaoPercursoTabelaController implements Initializabl
     @FXML
     private TableColumn selecao;
 
-
     private Adjacencia lista;
     private Grafo grafo;
 
@@ -118,6 +117,11 @@ public class FXMLpainelAplicacaoPercursoTabelaController implements Initializabl
             for (Aresta a : grafo.getEdges()) {
                 a.getForma().setStroke(Color.BLACK);
                 a.getForma().setStrokeWidth(2);
+                if (a.getLabelPeso() != null) {
+                    a.getLabelPeso().setStroke(Color.BLACK);
+                }
+                a.a.setStroke(Color.BLACK);
+                a.b.setStroke(Color.BLACK);
             }
 
             Queue<Integer> fila = new LinkedList<>();
@@ -162,8 +166,12 @@ public class FXMLpainelAplicacaoPercursoTabelaController implements Initializabl
                         a.getOrigemVertice().numero.toFront();
                         a.getDestinoVertice().toFront();
                         a.getDestinoVertice().numero.toFront();
-                        if(a.getLabelPeso() != null) a.getLabelPeso().toFront();
-                        if(a.getLabelPeso() != null) a.getLabelPeso().setStroke(Color.RED);
+                        if (a.getLabelPeso() != null) {
+                            a.getLabelPeso().toFront();
+                        }
+                        if (a.getLabelPeso() != null) {
+                            a.getLabelPeso().setStroke(Color.RED);
+                        }
                         a.a.setStroke(Color.RED);
                         a.b.setStroke(Color.RED);
                     }

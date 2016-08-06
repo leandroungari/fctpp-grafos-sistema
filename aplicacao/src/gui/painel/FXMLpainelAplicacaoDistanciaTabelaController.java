@@ -165,6 +165,7 @@ public class FXMLpainelAplicacaoDistanciaTabelaController implements Initializab
             for (Aresta a : grafo.getEdges()) {
                 a.getForma().setStroke(Color.BLACK);
                 a.getForma().setStrokeWidth(2);
+                if(a.getLabelPeso() != null) a.getLabelPeso().setStroke(Color.BLACK);
             }
 
             Queue<Integer> fila = new LinkedList<>();
