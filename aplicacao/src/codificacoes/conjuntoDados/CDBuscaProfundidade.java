@@ -37,7 +37,6 @@ public class CDBuscaProfundidade {
         this.tempo = 0;
         
         //Precorrendo e verificando
-        //this.DFSVisitaClassificadosGrupo(this.vertices[verticeInicial], adj, ++componenteConexa);
         if(finalidade == 0) this.DFSVisitaClassificadosGrupo(this.vertices[0], adj, ++componenteConexa);
         else if(finalidade == 1) this.DFSVisitaMediaPublicoDeUmGrupo(this.vertices[0], adj, ++componenteConexa);
         else if(finalidade == 2) this.DFSVisitaCalcularCampeao(this.vertices[0], adj, ++componenteConexa);
@@ -61,8 +60,6 @@ public class CDBuscaProfundidade {
         
         v.setCor("CINZA");
         this.tempo++;
-        //v.setTempoInicio(this.tempo);
-        //v.setComponenteConexa(componenteConexa);
         
         adj.inicializaIterator(v.getNumero());
         while(adj.hasNext(v.getNumero())){
@@ -81,19 +78,14 @@ public class CDBuscaProfundidade {
                 this.vertices[v.getNumero()].setSaldoDeGols(gols);
             }
             
-            if(this.vertices[i].getCor().equalsIgnoreCase("BRANCO")){
-
-                //this.vertices[i].setPredecessor(v);
-                
+            if(this.vertices[i].getCor().equalsIgnoreCase("BRANCO")){                
                 
                 this.DFSVisitaClassificadosGrupo(this.vertices[i], adj, componenteConexa);
             }
         }//Fim while
         
         v.setCor("PRETO");
-        this.tempo++;
-        //v.setTempoFim(this.tempo);
-        
+        this.tempo++;        
     }
     
     
@@ -104,8 +96,6 @@ public class CDBuscaProfundidade {
         
         v.setCor("CINZA");
         this.tempo++;
-        //v.setTempoInicio(this.tempo);
-        //v.setComponenteConexa(componenteConexa);
         
         adj.inicializaIterator(v.getNumero());
         while(adj.hasNext(v.getNumero())){
@@ -115,20 +105,16 @@ public class CDBuscaProfundidade {
             
             publico = (double) adj.getPeso(v.getNumero(), i);
             
-            //this.vertices[i].setMediaDePublico(publico);
             this.vertices[v.getNumero()].setPublicoTotal(publico);
             
             if(this.vertices[i].getCor().equalsIgnoreCase("BRANCO")){
 
-                //this.vertices[i].setPredecessor(v);
                 this.DFSVisitaMediaPublicoDeUmGrupo(this.vertices[i], adj, componenteConexa);
             }
         }//Fim while
         
         v.setCor("PRETO");
-        this.tempo++;
-        //v.setTempoFim(this.tempo);
-        
+        this.tempo++;        
     }
     
     public void DFSVisitaCalcularCampeao(VerticeSelecao v, Adjacencia adj, int componenteConexa){
@@ -139,8 +125,6 @@ public class CDBuscaProfundidade {
         v.setCor("CINZA");
         v.setFaseDaCompeticao("Fase de grupos");
         this.tempo++;
-        //v.setTempoInicio(this.tempo);
-        //v.setComponenteConexa(componenteConexa);
         
         adj.inicializaIterator(v.getNumero());
         while(adj.hasNext(v.getNumero())){
@@ -150,12 +134,10 @@ public class CDBuscaProfundidade {
             
             numeroJogos = this.vertices[v.getNumero()].getNumeroDeJogos() + 1;
             
-            //this.vertices[i].setMediaDePublico(publico);
             this.vertices[v.getNumero()].setNumeroDeJogos(numeroJogos);
             
             if(this.vertices[i].getCor().equalsIgnoreCase("BRANCO")){
 
-                //this.vertices[i].setPredecessor(v);
                 this.DFSVisitaCalcularCampeao(this.vertices[i], adj, componenteConexa);
             }
         }//Fim while
@@ -166,7 +148,6 @@ public class CDBuscaProfundidade {
         else if(v.getNumeroDeJogos() == 5) v.setFaseDaCompeticao("Quartas de final");
         else if(v.getNumeroDeJogos() == 4) v.setFaseDaCompeticao("Oitavas de final");
         this.tempo++;
-        //v.setTempoFim(this.tempo);
     }
     
     public void resultadosDaBusca(int finalidade){

@@ -51,10 +51,6 @@ public class ConjuntoDados {
         CDBuscaProfundidade cdb = new CDBuscaProfundidade(this.adj, this.selecoes);
         cdb.DFS(this.adj, 0, 0);
         
-        //Arrays.sort(cdb.vertices, 0, 4, Collections.reverseOrder());
-        //cdb.vertices[0].setClassificada(true);
-        //cdb.vertices[1].setClassificada(true);
-        
         int inicio = 0, fim = 4;
         while(fim <= 32){
             Arrays.sort(cdb.vertices, inicio, fim, Collections.reverseOrder());

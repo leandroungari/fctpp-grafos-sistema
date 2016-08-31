@@ -157,10 +157,6 @@ public class VerticeSelecao implements Comparable<VerticeSelecao> {
         
     }
     
-    public void mostrarSelecaoFase(){
-        
-    }
-    
     @Override
     public int compareTo(VerticeSelecao o) {
         
