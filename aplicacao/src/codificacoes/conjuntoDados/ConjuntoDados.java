@@ -96,7 +96,7 @@ public class ConjuntoDados {
         cdb.resultadosDaBusca(2);
     }
     
-    public void calcularSelecaoMaiorMediaPublicoFaseGrupos(){
+    public VerticeSelecao[] calcularSelecaoMaiorMediaPublicoFaseGrupos(){
         
         CDBuscaProfundidade cdb = new CDBuscaProfundidade(this.adj, this.selecoes);
         cdb.DFS(this.adj, 0, 1);
@@ -109,6 +109,8 @@ public class ConjuntoDados {
         cdb.vertices = CDOrdenacao.quickSort(cdb.vertices, 0, 31);
         
         cdb.resultadosDaBusca(3);
+        
+        return cdb.vertices;
     }
     
     public void calcularMediaPublicoDeUmGrupo(){

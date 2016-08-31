@@ -9,6 +9,7 @@ import codificacoes.conjuntoDados.ConjuntoDados;
 import codificacoes.conjuntoDados.VerticeSelecao;
 import codificacoes.representacaoComputacional.*;
 import desenho.Grafo;
+import desenho.RainbowScale;
 import desenho.Vertice;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
@@ -127,6 +129,9 @@ public class FXMLPrincipalController implements Initializable {
 
     @FXML
     private MenuItem aplicacaoSedes;
+
+    @FXML
+    private MenuItem aplicacaoClassificadosGrupo;
 
     //////////////
     public static Adjacencia lista;
@@ -411,7 +416,7 @@ public class FXMLPrincipalController implements Initializable {
 
             int numero = 0;
             String fase = "";
-
+            VerticeSelecao selecionado = null;
             for (Vertice a : grafo.getVertex()) {
 
                 numero = a.getID();
@@ -420,12 +425,21 @@ public class FXMLPrincipalController implements Initializable {
 
                     if (vert.getNumero() == numero) {
                         fase = vert.getFaseDaCompeticao();
+                        selecionado = vert;
                         break;
                     }
                 }
 
                 if (fase.equalsIgnoreCase("Final")) {
-                    a.setFill(Color.RED);
+                    
+                    
+                    if(selecionado.getPosicao().equalsIgnoreCase("Campeão")){
+                        a.setFill(Color.GOLD);
+                    }
+                    else{
+                        a.setFill(Color.SILVER);
+                    }
+                    
                 } else {
                     a.setFill(Color.BLACK);
                 }
@@ -637,7 +651,7 @@ public class FXMLPrincipalController implements Initializable {
                     }
                 }
 
-                if (fase.equalsIgnoreCase("Oitavas de Final")) {
+                if (fase.equalsIgnoreCase("Oitavas de Final") || fase.equalsIgnoreCase("Quartas de Final") || fase.equalsIgnoreCase("Semi-Final") || fase.equalsIgnoreCase("Final")) {
                     a.setFill(Color.LIGHTBLUE);
                 } else {
                     a.setFill(Color.BLACK);
@@ -660,7 +674,7 @@ public class FXMLPrincipalController implements Initializable {
         });
 
         aplicacaoPercurso.setOnAction(event -> {
-            
+
             //Mostrando grafo
             File file = new File("distancia.txt");
             int posicao = file.getAbsolutePath().indexOf("distancia.txt");
@@ -719,7 +733,7 @@ public class FXMLPrincipalController implements Initializable {
                     }
                 }
 
-                if (fase.equalsIgnoreCase("Quartas de Final")) {
+                if (fase.equalsIgnoreCase("Quartas de Final") || fase.equalsIgnoreCase("Semi-Final") || fase.equalsIgnoreCase("Final")) {
                     a.setFill(Color.GREEN);
                 } else {
                     a.setFill(Color.BLACK);
@@ -775,7 +789,7 @@ public class FXMLPrincipalController implements Initializable {
                     }
                 }
 
-                if (fase.equalsIgnoreCase("Semi-Final")) {
+                if (fase.equalsIgnoreCase("Semi-Final") || fase.equalsIgnoreCase("Final")) {
                     a.setFill(Color.ORANGE);
                 } else {
                     a.setFill(Color.BLACK);
@@ -842,6 +856,70 @@ public class FXMLPrincipalController implements Initializable {
 
             stage.initStyle(StageStyle.DECORATED);
             stage.show();
+
+        });
+
+        aplicacaoClassificadosGrupo.setOnAction(event -> {
+
+            FXMLPrincipalController.painelD.getChildren().clear();
+            FXMLPrincipalController.painel.getChildren().clear();
+
+            //Mostrando grafo
+            File file = new File("distancia.txt");
+            int posicao = file.getAbsolutePath().indexOf("distancia.txt");
+            String path = file.getAbsolutePath().substring(0, posicao - 10);
+            file = new File(path + "grafos/conjuntoDeDados/grafosDigrafos/competicaoCompleta/competicaoCompleta.txt");
+
+            lista = Arquivo.leituraArquivo(file.getAbsolutePath(), false);
+            painelDesenho.getChildren().clear();
+            grafo = new Grafo(painelDesenho, lista.getNumeroVertices(), lista);
+            grafo.desenhar();
+
+            ConjuntoDados conj = new ConjuntoDados(lista);
+            conj.calcularClassificadosDeTodosGrupos();
+
+            int numero = 0;
+            int salto = 255 / 9, r, g, b, i = 1;
+            RainbowScale cS = new RainbowScale();
+
+            for (Vertice a : grafo.getVertex()) {
+
+                numero = a.getID();
+
+                for (VerticeSelecao vert : conj.selecoes) {
+
+                    if (vert.getNumero() == numero) {
+
+                        if (vert.isClassificada()) {
+                            i++;
+                            
+                            java.awt.Color awt = cS.getColor((i / 2) * salto);
+                            r = awt.getRed();
+                            g = awt.getGreen();
+                            b = awt.getBlue();
+
+                            javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(r, g, b);
+                            a.setFill(fxColor);
+                        } else {
+                            a.setFill(Color.BLACK);
+                        }
+                    }
+
+                }
+
+            }
+
+            fecharArquivo.setDisable(false);
+            exportarArquivo.setDisable(false);
+
+            //Mostrando barra
+            try {
+
+                painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelAplicacaoClassificados.fxml")));
+
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         });
 

@@ -46,6 +46,21 @@ public class FXMLpainelAplicacaoMediaPublicoController implements Initializable 
 
     @FXML
     private ChoiceBox choice;
+    
+    @FXML
+    private Text media1;
+    
+    @FXML
+    private Text media2;
+    
+    @FXML
+    private Text media3;
+    
+    @FXML
+    private Text media4;
+    
+    @FXML
+    private Text media5;
 
     private Adjacencia lista;
     private Grafo grafo;
@@ -69,6 +84,16 @@ public class FXMLpainelAplicacaoMediaPublicoController implements Initializable 
         soma /= c.quantSelecoes;
 
         media.setText(media.getText() + String.format("%.2f", soma * 1000));
+        
+        VerticeSelecao[] conj = c.calcularSelecaoMaiorMediaPublicoFaseGrupos();
+        
+        media1.setText(conj[0].getNumero() + " - " + String.format("%.2f", conj[0].getMediaDePublico()));
+        media2.setText(conj[1].getNumero() + " - " + String.format("%.2f", conj[1].getMediaDePublico()));
+        media3.setText(conj[2].getNumero() + " - " + String.format("%.2f", conj[2].getMediaDePublico()));
+        media4.setText(conj[3].getNumero() + " - " + String.format("%.2f", conj[3].getMediaDePublico()));
+        media5.setText(conj[4].getNumero() + " - " + String.format("%.2f", conj[4].getMediaDePublico()));
+        
+        
 
         buttonExecutar.setOnAction(event -> {
 
@@ -134,7 +159,6 @@ public class FXMLpainelAplicacaoMediaPublicoController implements Initializable 
 
             somaGrupo /= grupo.quantSelecoes;
             
-            System.out.println();
 
             media.setText("Média " + choiceValor + ": " + String.format("%.2f", somaGrupo * 1000));
         });
