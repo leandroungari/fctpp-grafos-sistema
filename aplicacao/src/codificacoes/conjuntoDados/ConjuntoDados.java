@@ -43,7 +43,7 @@ public class ConjuntoDados {
         Arrays.sort(cdb.vertices, Collections.reverseOrder());
         cdb.vertices[0].setClassificada(true);
         cdb.vertices[1].setClassificada(true);
-        cdb.resultadosDaBusca(0);
+        //cdb.resultadosDaBusca(0);
     }
     
     public void calcularClassificadosDeTodosGrupos(){
@@ -60,7 +60,7 @@ public class ConjuntoDados {
             fim += 4;
         }
         
-        cdb.resultadosDaBusca(0);
+        //cdb.resultadosDaBusca(0);
     }
     
     public void calcularCampeao(){
@@ -89,7 +89,7 @@ public class ConjuntoDados {
             cdb.vertices[finalista[0]].setPosicao("Vice-Campeão");
         }
         
-        cdb.resultadosDaBusca(2);
+        //cdb.resultadosDaBusca(2);
     }
     
     public VerticeSelecao[] calcularSelecaoMaiorMediaPublicoFaseGrupos(){
@@ -104,7 +104,7 @@ public class ConjuntoDados {
         
         cdb.vertices = CDOrdenacao.quickSort(cdb.vertices, 0, 31);
         
-        cdb.resultadosDaBusca(3);
+        //cdb.resultadosDaBusca(3);
         
         return cdb.vertices;
     }
@@ -121,7 +121,7 @@ public class ConjuntoDados {
         
         CDOrdenacao.quickSort(cdb.vertices, 0, 3);
         
-        cdb.resultadosDaBusca(1);
+        //cdb.resultadosDaBusca(1);
     }
     
 }

@@ -18,7 +18,7 @@
       <Text fx:id="media1" layoutX="13.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 públicos:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
       <Text fx:id="media2" layoutX="13.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 públicos:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
       <Text fx:id="media3" layoutX="13.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 públicos:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
-      <Text fx:id="media4" layoutX="13.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 públicos:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
-      <Text fx:id="media5" layoutX="13.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 públicos:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
+      <Text fx:id="media4" layoutX="13.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 públicos:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
+      <Text fx:id="media5" layoutX="13.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 públicos:" textAlignment="JUSTIFY" wrappingWidth="176.734375" />
    </children>
 </Pane>

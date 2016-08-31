@@ -73,19 +73,20 @@ public class FXMLpainelAplicacaoMediaPublicoController implements Initializable 
 
         choice.setItems(FXCollections.observableArrayList("Grupo A", "Grupo B", "Grupo C", "Grupo D", "Grupo E", "Grupo F", "Grupo G", "Grupo H"));
 
-        ConjuntoDados c = new ConjuntoDados(lista);
-        c.calcularMediaPublicoDeUmGrupo();
+        ConjuntoDados c1 = new ConjuntoDados(lista);
+        ConjuntoDados c2 = new ConjuntoDados(lista);
+        c1.calcularMediaPublicoDeUmGrupo();
 
         double soma = 0;
-        for (VerticeSelecao v : c.selecoes) {
+        for (VerticeSelecao v : c1.selecoes) {
             soma += v.getMediaDePublico();
         }
 
-        soma /= c.quantSelecoes;
+        soma /= c1.quantSelecoes;
 
-        media.setText(media.getText() + String.format("%.2f", soma * 1000));
+        media.setText(media.getText() + String.format("%.2f", soma));
         
-        VerticeSelecao[] conj = c.calcularSelecaoMaiorMediaPublicoFaseGrupos();
+        VerticeSelecao[] conj = c2.calcularSelecaoMaiorMediaPublicoFaseGrupos();
         
         media1.setText(conj[0].getNumero() + " - " + String.format("%.2f", conj[0].getMediaDePublico()));
         media2.setText(conj[1].getNumero() + " - " + String.format("%.2f", conj[1].getMediaDePublico()));
@@ -160,7 +161,7 @@ public class FXMLpainelAplicacaoMediaPublicoController implements Initializable 
             somaGrupo /= grupo.quantSelecoes;
             
 
-            media.setText("Média " + choiceValor + ": " + String.format("%.2f", somaGrupo * 1000));
+            media.setText("Média " + choiceValor + ": " + String.format("%.2f", somaGrupo));
         });
 
         buttonCancelar.setOnAction(event -> {

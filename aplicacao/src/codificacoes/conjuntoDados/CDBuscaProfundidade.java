@@ -100,11 +100,9 @@ public class CDBuscaProfundidade {
         adj.inicializaIterator(v.getNumero());
         while(adj.hasNext(v.getNumero())){
             
-            
             i = adj.next(v.getNumero());
             
             publico = (double) adj.getPeso(v.getNumero(), i);
-            
             this.vertices[v.getNumero()].setPublicoTotal(publico);
             
             if(this.vertices[i].getCor().equalsIgnoreCase("BRANCO")){

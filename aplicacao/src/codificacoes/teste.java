@@ -69,7 +69,7 @@ public class teste {
         //cd.calcularMediaPublicoDeUmGrupo();
         //cd.calcularCampeao();
         //cd.calcularClassificadosDeTodosGrupos();
-        cd.calcularSelecaoMaiorMediaPublicoFaseGrupos(); //Verificar
+        //cd.calcularSelecaoMaiorMediaPublicoFaseGrupos();
         
     }
 }
