@@ -46,19 +46,19 @@ public class FXMLpainelAplicacaoMediaPublicoController implements Initializable 
 
     @FXML
     private ChoiceBox choice;
-    
+
     @FXML
     private Text media1;
-    
+
     @FXML
     private Text media2;
-    
+
     @FXML
     private Text media3;
-    
+
     @FXML
     private Text media4;
-    
+
     @FXML
     private Text media5;
 
@@ -85,16 +85,14 @@ public class FXMLpainelAplicacaoMediaPublicoController implements Initializable 
         soma /= c1.quantSelecoes;
 
         media.setText(media.getText() + String.format("%.2f", soma));
-        
+
         VerticeSelecao[] conj = c2.calcularSelecaoMaiorMediaPublicoFaseGrupos();
-        
+
         media1.setText(conj[0].getNumero() + " - " + String.format("%.2f", conj[0].getMediaDePublico()));
         media2.setText(conj[1].getNumero() + " - " + String.format("%.2f", conj[1].getMediaDePublico()));
         media3.setText(conj[2].getNumero() + " - " + String.format("%.2f", conj[2].getMediaDePublico()));
         media4.setText(conj[3].getNumero() + " - " + String.format("%.2f", conj[3].getMediaDePublico()));
         media5.setText(conj[4].getNumero() + " - " + String.format("%.2f", conj[4].getMediaDePublico()));
-        
-        
 
         buttonExecutar.setOnAction(event -> {
 
@@ -159,9 +157,17 @@ public class FXMLpainelAplicacaoMediaPublicoController implements Initializable 
             }
 
             somaGrupo /= grupo.quantSelecoes;
-            
 
             media.setText("Média " + choiceValor + ": " + String.format("%.2f", somaGrupo));
+            
+            ConjuntoDados al = new ConjuntoDados(lista);
+            VerticeSelecao[] vetor = al.calcularMediaPublicoDeUmGrupo();
+
+            media1.setText(vetor[0].getNumero() + " - " + String.format("%.2f", vetor[0].getMediaDePublico()));
+            media2.setText(vetor[1].getNumero() + " - " + String.format("%.2f", vetor[1].getMediaDePublico()));
+            media3.setText(vetor[2].getNumero() + " - " + String.format("%.2f", vetor[2].getMediaDePublico()));
+            media4.setText(vetor[3].getNumero() + " - " + String.format("%.2f", vetor[3].getMediaDePublico()));
+            media5.setText("");
         });
 
         buttonCancelar.setOnAction(event -> {
