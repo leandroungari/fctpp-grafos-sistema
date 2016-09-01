@@ -6,8 +6,6 @@
 package desenho;
 
 import javafx.scene.effect.Light.Point;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -48,21 +46,30 @@ public abstract class Aresta {
     
     public void selecionarAresta() {
         this.getForma().setStrokeWidth(5);
-        this.a.setStrokeWidth(5);
-        this.b.setStrokeWidth(5);
+        if(directed && origem.getID() != destino.getID()) {
+            this.a.setStrokeWidth(5);
+            this.b.setStrokeWidth(5);
+        }
+        
         selected = true;
     }
 
     public void desselecionarAresta() {
         this.getForma().setStrokeWidth(2);
-        this.a.setStrokeWidth(2);
-        this.b.setStrokeWidth(2);
+        if(directed && origem.getID() != destino.getID()){
+            this.a.setStrokeWidth(2);
+            this.b.setStrokeWidth(2);
+        }
+        
         selected = false;
     }
 
     public void opacidade(double value) {
-        this.a.setOpacity(value);
-        this.b.setOpacity(value);
+        if(directed && origem.getID() != destino.getID()){
+            this.a.setOpacity(value);
+            this.b.setOpacity(value);
+        }
+        
         this.getForma().setOpacity(value);
     }
 
