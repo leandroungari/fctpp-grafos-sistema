@@ -15,6 +15,7 @@ import desenho.Aresta;
 import desenho.Grafo;
 import gui.FXMLPrincipalController;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.ResourceBundle;
@@ -23,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -39,8 +41,8 @@ public class FXMLpainelBuscaLarguraController implements Initializable {
 
     @FXML
     private Button buttonFechar;
-    
-    @FXML 
+
+    @FXML
     private TextField verticeInicial;
 
     private Adjacencia lista;
@@ -54,81 +56,100 @@ public class FXMLpainelBuscaLarguraController implements Initializable {
         grafo = FXMLPrincipalController.getGrafo();
         realizado = false;
         buttonExecutar.setDisable(true);
-        
-        
+
         //tetrminar a busca em largura, tem que reestruturar o grafo !!!!
         buttonExecutar.setOnAction(event -> {
-            
+
             int valor = Integer.parseInt(verticeInicial.getText());
             
+            for(Aresta a: grafo.getEdges()){
+                a.getForma().setStroke(Color.BLACK);
+            }
+
             Vertice vertice = new Vertice();
             vertice.setPosicao(valor);
-            
+
             realizado = true;
             BuscaLargura busca = new BuscaLargura(lista);
             busca.BFS(lista, vertice);
-            
+
             Queue<Integer> fila = new LinkedList();
             Integer pai;
             fila.add(valor);
-            
-            
-            Adjacencia nova = new Adjacencia(lista.getNumeroVertices(), new ListaAdjacencia(lista.getNumeroVertices()), false);
-            nova.setTipoGrafo(lista.isTipoGrafo());
-            
-            while(!fila.isEmpty()){
-                
+            Queue<Integer> resultado = new LinkedList<>();
+
+            while (!fila.isEmpty()) {
+
                 pai = fila.poll();
                 //grafo.getVertice(pai).selecionarVertice();
-                for(Vertice vert:busca.vertices){
-                    
-                    if(vert != null && vert.getPredecessor()!= null && vert.getPredecessor().getPosicao() == pai){
-                        
+                for (Vertice vert : busca.vertices) {
+
+                    if (vert != null && vert.getPredecessor() != null && vert.getPredecessor().getPosicao() == pai) {
+
                         //grafo.getAresta(pai, vert.getPosicao()).selecionarAresta();
-                        nova.adicionaAresta(pai, vert.getPosicao(), lista.getPeso(pai, vert.getPosicao()));
+                        //nova.adicionaAresta(pai, vert.getPosicao(), lista.getPeso(pai, vert.getPosicao()));
+                        resultado.add(pai);
+                        resultado.add(vert.getPosicao());
                         fila.add(vert.getPosicao());
                     }
-                } 
+                }
             }
-            
-            Grafo novoGrafo = new Grafo(FXMLPrincipalController.painelD, nova.getNumeroVertices(), nova);
-            FXMLPrincipalController.painelD.getChildren().clear();
-            
-            novoGrafo.desenhar();
-            
+            int x, y;
+
+            System.out.println(resultado);
+
+            System.out.println(grafo.getEdges());
+            while (!resultado.isEmpty()) {
+                x = resultado.poll();
+                y = resultado.poll();
+
+                for (Aresta a : grafo.getEdges()) {
+
+                    if (!lista.isTipoGrafo()) {
+                        System.out.println("passou");
+                        if (x == a.getOrigem() && y == a.getDestino() || y == a.getOrigem() && x == a.getDestino()) {
+                            a.getForma().setStroke(Color.RED);
+                            break;
+                        }
+                    } else if (x == a.getOrigem() && y == a.getDestino()) {
+                        a.getForma().setStroke(Color.RED);
+                        break;
+                    }
+
+                }
+            }
+
         });
 
         buttonFechar.setOnAction(event -> {
-            
+
             FXMLPrincipalController.limparPainelPropriedades();
-            
+
             if (realizado) {
-                
+
                 Pane painelDesenho = FXMLPrincipalController.painelD;
                 painelDesenho.getChildren().clear();
                 grafo.desenhar();
             }
 
         });
-        
+
         verticeInicial.setOnKeyReleased(event -> {
-            
+
             int valor = 0;
-            
-            try{
+
+            try {
                 valor = Integer.parseInt(verticeInicial.getText());
-            }
-            catch(NumberFormatException e){
-                
+            } catch (NumberFormatException e) {
+
                 buttonExecutar.setDisable(true);
                 return;
             }
-            
-            if(valor >= 0 && valor < lista.getNumeroVertices()){
-                
+
+            if (valor >= 0 && valor < lista.getNumeroVertices()) {
+
                 buttonExecutar.setDisable(false);
-            }
-            else{
+            } else {
                 buttonExecutar.setDisable(true);
             }
         });

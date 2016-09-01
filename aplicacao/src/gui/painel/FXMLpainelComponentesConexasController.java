@@ -77,8 +77,6 @@ public class FXMLpainelComponentesConexasController implements Initializable {
 
                 fxColor = javafx.scene.paint.Color.rgb(r, g, b);
                 aresta.getForma().setFill(fxColor);
-                aresta.a.setStroke(fxColor);
-                aresta.b.setStroke(fxColor);
             }
             
             a.desenhar();

@@ -125,5 +125,7 @@ public abstract class Aresta {
         return labelPeso;
     }
     
-    
+    public String toString(){
+        return " ["+this.getOrigem()+","+this.getDestino()+ "] ";
+    }
 }

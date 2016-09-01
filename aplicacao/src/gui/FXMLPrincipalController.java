@@ -268,6 +268,16 @@ public class FXMLPrincipalController implements Initializable {
         });
 
         ordemTopologica.setOnAction(event -> {
+            
+            if (!lista.isTipoGrafo()) {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Verifique o tipo do grafo");
+                alert.setHeaderText("Atenção, isto é uma mensagem de aviso!");
+                alert.setContentText("Este algoritmo é destinado somente para grafos direcionados.");
+                alert.showAndWait();
+                return;
+            }
+            
             try {
 
                 painelPropriedades.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("painel/FXMLpainelTopologica.fxml")));

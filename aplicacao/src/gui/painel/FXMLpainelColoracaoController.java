@@ -47,6 +47,7 @@ public class FXMLpainelColoracaoController implements Initializable {
         realizado = false;
 
         buttonExecutar.setOnAction(event -> {
+            
             realizado = true;
             
             FXMLPrincipalController.painelD.getChildren().clear();
