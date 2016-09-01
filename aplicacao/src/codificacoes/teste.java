@@ -25,7 +25,7 @@ public class teste {
     
     public static void main(String [] args){
         
-        Adjacencia adj = Arquivo.leituraArquivo("C:/Users/BRUNO/Documents/Ciência da Computação - UNESP/3º Ano/1º Semestre/Teoria dos Grafos/Trabalho/2º Bimestre/fctpp-grafos-sistema/grafos/conjuntoDeDados/grafosDigrafos/publicoGrupos/faseDeGrupos.txt", false);
+        Adjacencia adj = Arquivo.leituraArquivo("C:/Users/BRUNO/Documents/Ciência da Computação - UNESP/3º Ano/1º Semestre/Teoria dos Grafos/Trabalho/2º Bimestre/fctpp-grafos-sistema/grafos/grafosExemplos/coloracao2.txt", false);
         //adj.getRepresentacao().exibir();
         
         /*
@@ -54,17 +54,17 @@ public class teste {
         adjTransposta.exibir();
         */
         
-        /*
+        
         Coloracao c = new Coloracao(adj);
         c.AlgoritmoColoracao(adj);
         c.exibirVertices();
-        */
+        
         
         /*Conectividade c = new Conectividade(adj);
         c.algoritmoConectividade(adj);
         c.mostrarVertices();*/
         
-        ConjuntoDados cd = new ConjuntoDados(adj);
+        //ConjuntoDados cd = new ConjuntoDados(adj);
         //cd.calcularClassificadosDeUmGrupo();
         //cd.calcularMediaPublicoDeUmGrupo();
         //cd.calcularCampeao();

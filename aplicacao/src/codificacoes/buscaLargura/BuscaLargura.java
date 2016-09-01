@@ -30,7 +30,7 @@ public class BuscaLargura {
     
     public void BFS(Adjacencia adj, Vertice verticeInicial){
         
-        int i;
+        int i, pos = -1;
         for(i = 0; i < this.vertices.length; i++){
             
             if(this.vertices[i].getPosicao() != verticeInicial.getPosicao()){
@@ -39,11 +39,15 @@ public class BuscaLargura {
                 this.vertices[i].setDistancia(0);
                 this.vertices[i].setPredecessor(null);
             }
+            else pos = i;
         }
         
         verticeInicial.setCor("CINZA");
         verticeInicial.setDistancia(0);
         verticeInicial.setPredecessor(null);
+        this.vertices[pos].setCor("CINZA");
+        this.vertices[pos].setDistancia(0);
+        this.vertices[pos].setPredecessor(null);
         
         //Queue<Vertice> fila = new LinkedList();
         Fila fila = new Fila();

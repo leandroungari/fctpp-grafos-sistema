@@ -42,6 +42,7 @@ public class Coloracao {
         
         //O vertice inicial é o vertice com o maior grau do grafo.
         int verticeInicial = this.retornaVerticeDeMaiorGrau(adj);
+        System.out.println("Vertice maior grau: " + verticeInicial);
         this.coloreVertice(adj, verticeInicial);
         
     }
@@ -67,7 +68,6 @@ public class Coloracao {
             if(!this.vertices[vizinho].isVisitado()) this.coloreVertice(adj, vizinho);
             
         }//Fim while
-        
         
     }
     
@@ -116,24 +116,23 @@ public class Coloracao {
         //Se não estiver vazia
         //cont = this.colors.size();
         cont = 0;
-        adj.inicializaIterator(verticeInicial);
+        //adj.inicializaIterator(verticeInicial);
         for(int tc : this.colors){
             
             cor = tc;
             //this.vertices[verticeInicial].setCor(tc);
-            
+            adj.inicializaIterator(verticeInicial);
             while(verif = adj.hasNext(verticeInicial)){
                 
                 i = adj.next(verticeInicial);
                 
                 if(this.vertices[i].getCor() != -1){
-                    
                 if(this.vertices[i].getCor() == cor) break;
                 
                 }
             }//Fim do while
             cont++;
-            
+            if(verticeInicial == 3) System.out.println("cont = " + cont + "size = " + this.colors.size());
             if(!verif && cont < this.colors.size()) return(tc); //CorBuscada que já está presente na estrutura de cores.
             
         }//Fim do for

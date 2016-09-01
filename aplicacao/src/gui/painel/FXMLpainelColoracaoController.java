@@ -54,6 +54,7 @@ public class FXMLpainelColoracaoController implements Initializable {
             
             Coloracao c = new Coloracao(lista);
             c.AlgoritmoColoracao(lista);
+            c.exibirVertices();
             
             javafx.scene.paint.Color fxColor;
             java.awt.Color awt;
