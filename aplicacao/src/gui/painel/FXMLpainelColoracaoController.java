@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -34,6 +35,9 @@ public class FXMLpainelColoracaoController implements Initializable {
 
     @FXML
     private Button buttonFechar;
+    
+    @FXML
+    private Text numeroCromatico;
 
     private Adjacencia lista;
     private Grafo grafo;
@@ -77,6 +81,8 @@ public class FXMLpainelColoracaoController implements Initializable {
             }
             
             novo.desenhar();
+            
+            numeroCromatico.setText("Número cromático: " + c.colors.size());
 
         });
 

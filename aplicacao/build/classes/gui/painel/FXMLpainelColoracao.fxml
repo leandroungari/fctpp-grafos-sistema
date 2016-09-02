@@ -13,5 +13,6 @@
       <Button fx:id="buttonExecutar" layoutX="23.0" layoutY="146.0" mnemonicParsing="false" text="Executar" />
       <Button fx:id="buttonFechar" layoutX="97.0" layoutY="146.0" mnemonicParsing="false" text="Fechar" />
       <Label fx:id="titulo" layoutX="14.0" layoutY="29.0" style="-fx-font-weight: bold;" text="Coloração" />
+      <Text fx:id="numeroCromatico" layoutX="12.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </Pane>
