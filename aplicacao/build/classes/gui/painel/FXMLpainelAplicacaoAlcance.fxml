@@ -16,7 +16,8 @@
       <Label layoutX="15.0" layoutY="238.0" text="Oitavas de Final - Azul Claro" />
       <Label layoutX="15.0" layoutY="255.0" text="Quartas de Final - Verde" />
       <Label layoutX="15.0" layoutY="272.0" text="Semifinal - Laranja" />
-      <Label layoutX="15.0" layoutY="289.0" text="Final - Vermelho" />
+      <Label layoutX="15.0" layoutY="289.0" text="Final - Amarelo - Campeão" />
       <Label layoutX="18.0" layoutY="191.0" text="Cores:" />
+      <Label layoutX="15.0" layoutY="306.0" text="Final - Prata - Vice-campeão" />
    </children>
 </Pane>
